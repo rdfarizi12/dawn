@@ -28,6 +28,7 @@ async def send_keepalive_request(appid, bearer_token, username, extension_id, nu
     }
 
     connector = None
+    proxy_url = None  # Initialize proxy_url to avoid referencing before assignment
     if proxy:
         connector = aiohttp.TCPConnector(ssl=False)  # Disable SSL verification for the proxy
         proxy_url = proxy if proxy.startswith('http://') or proxy.startswith('https://') else f"http://{proxy}"
@@ -53,6 +54,7 @@ async def read_proxies_from_file(file_path):
         return []
 
 async def main():
+    logger.info("Join for more bot on https://t.me/dasarpemulung")
     appid = "CHANGE YOUR APP ID"  # Your app ID
     bearer_token = "CHANGE YOUR BEARER"  # Your bearer token
     username = "CHANGE YOUR EMAIL"  # Replace with the actual username
@@ -73,10 +75,10 @@ async def main():
         response = await send_keepalive_request(appid, bearer_token, username, extension_id, number_of_tabs, proxy)
         if response is None:
             logger.error("Failed to keep alive, retrying in 10 seconds...")
-            await asyncio.sleep(10)  # Wait before retrying
+            await asyncio.sleep(5)  # Wait before retrying
         else:
             logger.info("Keep alive successful, waiting for the next cycle...")
-            await asyncio.sleep(30)  # Wait for a specified interval before the next request
+            await asyncio.sleep(10)  # Wait for a specified interval before the next request
 
 if __name__ == '__main__':
     asyncio.run(main())
