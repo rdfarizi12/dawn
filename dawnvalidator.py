@@ -54,6 +54,7 @@ async def read_proxies_from_file(file_path):
         return []
 
 async def main():
+    logger.info("For more bot JOIN https://t.me/dasarpemulung")
     appid = "CHANGE YOUR APP ID"  # Your app ID
     bearer_token = "CHANGE YOUR BEARER"  # Your bearer token
     username = "CHANGE YOUR EMAIL"  # Replace with the actual username
