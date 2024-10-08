@@ -2,6 +2,7 @@ import asyncio
 import json
 import aiohttp  # Ensure you have this library installed
 from loguru import logger
+import random  # Import random for random selection
 
 async def send_keepalive_request(appid, bearer_token, username, extension_id, number_of_tabs, proxy=None):
     url = f"https://www.aeropres.in/chromeapi/dawn/v1/userreward/keepalive?appid={appid}"
@@ -54,11 +55,10 @@ async def read_proxies_from_file(file_path):
         return []
 
 async def main():
-    logger.info("For more bot JOIN https://t.me/dasarpemulung")
-    appid = "CHANGE YOUR APP ID"  # Your app ID
-    bearer_token = "CHANGE YOUR BEARER"  # Your bearer token
-    username = "CHANGE YOUR EMAIL"  # Replace with the actual username
-    extension_id = "CHANGE YOUR EXTENSION ID"  # Replace with the actual extension ID
+    appid = "66fea3b25af24c1ea7e8acee"  # Your app ID
+    bearer_token = "2056b72d0eb33beb2a6d2d39c67296afa677fc1f271efaf0d84b5d50cd08aee410c07f2f8a6510b58ab067551517964a9b712a207a15ea4f311b2b0364b0fd4bae7648c4edd4df846361d141db0c35885277c641e0d6afbe952763136f733b572d940642f6a219d38dfdbc83fec35de354770e5ecae26f70015803c1e5788013a96dcd0456768d1dae2de7d2aa570f6b74eab39fc7cb62ca20c08cce93a60eb9ce86cb5993e174b9fe0757dfa2418dabde0a54bae454090db78abd37cb566930d2178cde8702b59ff7c548f8fa33070b577c87ea946b80723687eff8fb0a62c17beaed25971329056c18227337d1166d960fdb4473a474ccc711ff3c60b3cc23"  # Your bearer token
+    username = "usergues.only@gmail.com"  # Replace with the actual username
+    extension_id = "fpdkjdnhkakefebpekbdhillbhonfjjp"  # Replace with the actual extension ID
     number_of_tabs = 0  # Adjust this value if needed
 
     # Read proxies from proxy.txt
@@ -68,15 +68,20 @@ async def main():
         logger.info("No proxies found in proxy.txt. Running without a proxy.")
         proxy = None
     else:
-        proxy = proxies[0]  # Use the first proxy from the list
-        logger.info(f"Using proxy: {proxy}")
-
+        logger.info(f"Using {len(proxies)} proxies.")
+    
     while True:  # Auto loop
+        logger.info("Join Grup https://t.me/dasarpemulung")
+        proxy = random.choice(proxies) if proxies else None  # Randomly select a proxy if available
+        logger.info(f"Using proxy: {proxy}")  # Log the selected proxy
+        
         response = await send_keepalive_request(appid, bearer_token, username, extension_id, number_of_tabs, proxy)
         if response is None:
+            logger.info("Channel Youtube Dasar Pemulung")
             logger.error("Failed to keep alive, retrying in 10 seconds...")
             await asyncio.sleep(5)  # Wait before retrying
         else:
+            logger.info("Channel Youtube Dasar Pemulung")
             logger.info("Keep alive successful, waiting for the next cycle...")
             await asyncio.sleep(10)  # Wait for a specified interval before the next request
 
